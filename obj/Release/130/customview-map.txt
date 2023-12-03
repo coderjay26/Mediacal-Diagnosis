@@ -1,0 +1,104 @@
+adaptive-icon;obj\Release\130\res\mipmap-anydpi-v26\ic_launcher.xml
+androidx.cardview.widget.CardView;obj\Release\130\res\layout\profile_screen.xml
+attr;D:\GitHub\Mediacal Diagnosis\obj\Release\130\lp\0\jl\res\values\values.xml
+background;obj\Release\130\res\mipmap-anydpi-v26\ic_launcher.xml
+Button;obj\Release\130\res\layout\home_screen.xml
+Button;obj\Release\130\res\layout\login_screen.xml
+Button;obj\Release\130\res\layout\register_screen.xml
+cache-path;D:\GitHub\Mediacal Diagnosis\obj\Release\130\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
+CheckBox;obj\Release\130\res\layout\login_screen.xml
+CheckBox;obj\Release\130\res\layout\register_screen.xml
+clip-path;obj\Release\130\res\drawable\login.xml
+clip-path;obj\Release\130\res\drawable\rectangle_black.xml
+clip-path;obj\Release\130\res\drawable\rectangle_blue.xml
+color;obj\Release\130\res\values\colors.xml
+color;obj\Release\130\res\values\ic_launcher_background.xml
+com.airbnb.lottie.LottieAnimationView;obj\Release\130\res\layout\splash_view.xml
+com.google.android.material.bottomnavigation.BottomNavigationView;obj\Release\130\res\layout\tab.xml
+com.google.android.material.textfield.TextInputEditText;obj\Release\130\res\layout\login_screen.xml
+com.google.android.material.textfield.TextInputEditText;obj\Release\130\res\layout\register_screen.xml
+corners;obj\Release\130\res\drawable\btn_background.xml
+corners;obj\Release\130\res\drawable\image_background.xml
+declare-styleable;D:\GitHub\Mediacal Diagnosis\obj\Release\130\lp\0\jl\res\values\values.xml
+dimen;obj\Release\130\res\values\dimens.xml
+enum;D:\GitHub\Mediacal Diagnosis\obj\Release\130\lp\0\jl\res\values\values.xml
+external-cache-path;D:\GitHub\Mediacal Diagnosis\obj\Release\130\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
+external-path;D:\GitHub\Mediacal Diagnosis\obj\Release\130\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
+font;obj\Release\130\res\font\monserrat.xml
+font-family;obj\Release\130\res\font\monserrat.xml
+foreground;obj\Release\130\res\mipmap-anydpi-v26\ic_launcher.xml
+FrameLayout;obj\Release\130\res\layout\tab.xml
+group;obj\Release\130\res\drawable\login.xml
+group;obj\Release\130\res\drawable\rectangle_black.xml
+group;obj\Release\130\res\drawable\rectangle_blue.xml
+ImageButton;obj\Release\130\res\layout\profile_screen.xml
+ImageView;obj\Release\130\res\layout\home_screen.xml
+ImageView;obj\Release\130\res\layout\profile_screen.xml
+ImageView;obj\Release\130\res\layout\slide_screen_1.xml
+ImageView;obj\Release\130\res\layout\slide_screen_2.xml
+ImageView;obj\Release\130\res\layout\slide_screen_final.xml
+item;D:\GitHub\Mediacal Diagnosis\obj\Release\130\lp\0\jl\res\values\values.xml
+item;obj\Release\130\res\menu\navigation.xml
+item;obj\Release\130\res\values\splash.xml
+item;obj\Release\130\res\values\styles.xml
+LinearLayout;obj\Release\130\res\layout\home_screen.xml
+LinearLayout;obj\Release\130\res\layout\login_screen.xml
+LinearLayout;obj\Release\130\res\layout\profile_screen.xml
+LinearLayout;obj\Release\130\res\layout\register_screen.xml
+LinearLayout;obj\Release\130\res\layout\slide_screen_1.xml
+LinearLayout;obj\Release\130\res\layout\slide_screen_2.xml
+LinearLayout;obj\Release\130\res\layout\slide_screen_final.xml
+LinearLayout;obj\Release\130\res\layout\splash_view.xml
+menu;obj\Release\130\res\menu\navigation.xml
+path;obj\Release\130\res\drawable\email_24.xml
+path;obj\Release\130\res\drawable\ic_add_30.xml
+path;obj\Release\130\res\drawable\ic_home_40.xml
+path;obj\Release\130\res\drawable\ic_profile_40.xml
+path;obj\Release\130\res\drawable\lock_30.xml
+path;obj\Release\130\res\drawable\login.xml
+path;obj\Release\130\res\drawable\navigate_next.xml
+path;obj\Release\130\res\drawable\person_30.xml
+path;obj\Release\130\res\drawable\phone_number.xml
+path;obj\Release\130\res\drawable\rectangle_black.xml
+path;obj\Release\130\res\drawable\rectangle_blue.xml
+paths;D:\GitHub\Mediacal Diagnosis\obj\Release\130\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
+RelativeLayout;obj\Release\130\res\layout\activity_main.xml
+RelativeLayout;obj\Release\130\res\layout\home_screen.xml
+RelativeLayout;obj\Release\130\res\layout\profile_screen.xml
+RelativeLayout;obj\Release\130\res\layout\tab.xml
+resources;D:\GitHub\Mediacal Diagnosis\obj\Release\130\lp\0\jl\res\values\values.xml
+resources;obj\Release\130\res\values\colors.xml
+resources;obj\Release\130\res\values\dimens.xml
+resources;obj\Release\130\res\values\ic_launcher_background.xml
+resources;obj\Release\130\res\values\splash.xml
+resources;obj\Release\130\res\values\strings.xml
+resources;obj\Release\130\res\values\styles.xml
+shape;obj\Release\130\res\drawable\btn_background.xml
+shape;obj\Release\130\res\drawable\image_background.xml
+solid;obj\Release\130\res\drawable\btn_background.xml
+solid;obj\Release\130\res\drawable\image_background.xml
+string;obj\Release\130\res\values\strings.xml
+style;obj\Release\130\res\values\splash.xml
+style;obj\Release\130\res\values\styles.xml
+TextView;obj\Release\130\res\layout\activity_main.xml
+TextView;obj\Release\130\res\layout\home_screen.xml
+TextView;obj\Release\130\res\layout\login_screen.xml
+TextView;obj\Release\130\res\layout\profile_screen.xml
+TextView;obj\Release\130\res\layout\register_screen.xml
+TextView;obj\Release\130\res\layout\slide_screen_1.xml
+TextView;obj\Release\130\res\layout\slide_screen_2.xml
+TextView;obj\Release\130\res\layout\slide_screen_final.xml
+vector;obj\Release\130\res\drawable\email_24.xml
+vector;obj\Release\130\res\drawable\ic_add_30.xml
+vector;obj\Release\130\res\drawable\ic_home_40.xml
+vector;obj\Release\130\res\drawable\ic_profile_40.xml
+vector;obj\Release\130\res\drawable\lock_30.xml
+vector;obj\Release\130\res\drawable\login.xml
+vector;obj\Release\130\res\drawable\navigate_next.xml
+vector;obj\Release\130\res\drawable\person_30.xml
+vector;obj\Release\130\res\drawable\phone_number.xml
+vector;obj\Release\130\res\drawable\rectangle_black.xml
+vector;obj\Release\130\res\drawable\rectangle_blue.xml
+View;obj\Release\130\res\layout\slide_screen_1.xml
+View;obj\Release\130\res\layout\slide_screen_2.xml
+View;obj\Release\130\res\layout\slide_screen_final.xml

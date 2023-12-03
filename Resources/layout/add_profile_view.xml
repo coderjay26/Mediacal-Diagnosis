@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffffff">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/welcome_bac"
+            android:layout_width="match_parent"
+            android:text="@string/add_profile"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/welcome_bac"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:paddingHorizontal="@dimen/diH">
+        <com.google.android.material.textfield.TextInputEditText
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fullNameCreate"
+            android:hint="@string/full_name"
+            android:background="@drawable/login"
+            android:paddingHorizontal="@dimen/diH"
+            android:layout_marginBottom="@dimen/diH"
+            android:fontFamily="@font/montserrat_regular" />
+            <com.google.android.material.textfield.TextInputEditText
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/description"
+            android:hint="@string/description"
+            android:background="@drawable/login"
+            android:paddingHorizontal="@dimen/diH"
+            android:layout_marginBottom="@dimen/diH"
+            android:fontFamily="@font/montserrat_regular" />
+            <com.google.android.material.textfield.TextInputEditText
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/age"
+            android:hint="@string/age"
+            android:background="@drawable/login"
+            android:paddingHorizontal="@dimen/diH"
+            android:layout_marginBottom="@dimen/diH"
+            android:fontFamily="@font/montserrat_regular" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/height"
+            android:hint="@string/height"
+            android:background="@drawable/login"
+            android:paddingHorizontal="@dimen/diH"
+            android:layout_marginBottom="@dimen/diH"
+            android:fontFamily="@font/montserrat_regular" 
+            />
+        <com.google.android.material.textfield.TextInputEditText
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/weight"
+            android:hint="@string/weight"
+            android:background="@drawable/login"
+            android:paddingHorizontal="@dimen/diH"
+            android:layout_marginBottom="@dimen/diH"
+            android:fontFamily="@font/montserrat_regular"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/diH">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_profile"
+                android:gravity="center"
+                android:background="@drawable/btn_background"
+                android:padding="@dimen/diV"
+                android:textAppearance="@style/button"
+                android:text="@string/register"
+                android:textAllCaps="false"
+                android:drawableEnd="@drawable/navigate_next"
+                android:drawableTint="#ffffff"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

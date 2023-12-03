@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Mediacal_Diagnosis</string>
+    <string name="action_settings">Settings</string>
+	<string name="h_text_1">
+		Check your
+		symptoms
+	</string>
+	<string name="h_text_2">Choose what to do next</string>
+	<string name="h_text_3">Let’s get started master!</string>
+	<string name="b_text_1">Take a few moments to complete your assessment</string>
+	<string name="b_text_2">Get trusted advice about your care options.</string>
+	<string name="b_text_3">Personalize your profile and get started</string>
+	<string name="welcome_bac">Welcome back</string>
+	<string name="sign_in_to_">Sign in to access your account</string>
+	<string name="get_started">Get Started</string>
+	<string name="by_creating">by creating a free account.</string>
+	<string name="enter_email">Enter your Email</string>
+	<string name="pass">Password</string>
+	<string name="remember_me">Remember me</string>
+	<string name="forgot_pass">Forgot password?</string>
+	<string name="login">Login</string>
+	<string name="logout">Logout</string>
+	<string name="new_member">New Member? </string>
+	<string name="regis_now"> Register now</string>
+	<string name="tab_1">Home</string>
+	<string name="tab_2">Messages</string>	
+	<string name="tab_3">Profile</string>
+	<string name="full_name">Full name</string>
+	<string name="valid_email">Valid email</string>
+	<string name="phone_num">Phone number</string>
+	<string name="strong_pass">Strong Password</string>
+	<string name="already_member">Already a member?</string>
+	<string name="register">Next</string>
+	<string name="by_checking">By cheking the box you agree to our</string>
+	<string name="terms">Terms</string>
+	<string name="and">and</string>
+	<string name="conditions">Conditions</string>
+	<string name="home">Home</string>
+	<string name="profile">Profile</string>
+	<string name="home_text">Hi User,I am Mes. I can help you learn more about your health.</string>
+	<string name="start_assesment">Start symptom assessment</string>
+	<string name="health_profile">Health profiles</string>
+	<string name="add_profile">Create Profile</string>
+	<string name="description">Description</string>
+	<string name="age">Age</string>
+	<string name="height">Height</string>
+	<string name="weight">Weight</string>
+</resources>

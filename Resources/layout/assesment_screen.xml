@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/diV">
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/backbtn"
+        android:background="@drawable/arrow_back_ios"
+        android:contentDescription="go to last page when click" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/diH">
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:src="@drawable/trendy_ai_circle"
+            android:layout_marginEnd="5sp"
+            android:contentDescription="@string/home_text" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/b_text"
+            android:text="@string/home_text"
+            android:layout_toEndOf="@id/profile_image"
+            android:id="@+id/textView2" />
+    </RelativeLayout>
+</LinearLayout>
