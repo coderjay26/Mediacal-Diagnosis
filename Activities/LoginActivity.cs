@@ -6,6 +6,8 @@ using Android.Text;
 using Android.Views;
 using Android.Widget;
 using Google.Android.Material.TextField;
+using Mediacal_Diagnosis.Model;
+using Mediacal_Diagnosis.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,7 @@ namespace Mediacal_Diagnosis.Activities
         TextView loginBtn;
         TextInputEditText email, password;
         Button btn;
+        private AuthViewModel viewModel;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -31,6 +34,8 @@ namespace Mediacal_Diagnosis.Activities
             email = FindViewById<TextInputEditText>(Resource.Id.emailLogin);
             password = FindViewById<TextInputEditText> (Resource.Id.passwordLogin);
 
+            //Initialize the AuthViewModel
+            viewModel = new AuthViewModel();
 
             email.TextChanged += TextChange;
             password.TextChanged += TextChange;
@@ -38,10 +43,27 @@ namespace Mediacal_Diagnosis.Activities
             loginBtn.Click += RegisterNow;
 
             btn = FindViewById<Button>(Resource.Id.btnLogin);
-            btn.Click += (object sender, EventArgs e) =>
+            btn.Click += async(object sender, EventArgs e) =>
             {
-                Intent intent = new Intent(this, typeof(HomeScreen));
-                StartActivity(intent);
+                btn.Enabled = false;
+                var user = new ProfileModel
+                {
+                    Email = email.Text,
+                    Password = password.Text,
+                };
+                var result = await viewModel.AuthenticateUserAsync(user);
+
+                if(result == "success")
+                {
+                    Intent intent = new Intent(this, typeof(HomeScreen));
+                    StartActivity(intent);
+                }
+                else
+                {
+                    Toast.MakeText(this, "Login Failed!", ToastLength.Short).Show();
+                    btn.Enabled = true;
+                }
+                
             };
         }
 

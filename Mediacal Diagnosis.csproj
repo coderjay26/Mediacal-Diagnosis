@@ -89,6 +89,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\IProfileDataListener.cs" />
+    <Compile Include="ViewModels\AuthViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\splash.json" />
@@ -114,6 +115,9 @@
   <ItemGroup>
     <PackageReference Include="Com.Airbnb.Android.Lottie">
       <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Net.Http">
+      <Version>4.3.4</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.2.0.5" />
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0.1" />
