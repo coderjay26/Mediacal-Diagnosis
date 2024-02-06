@@ -1,13 +1,16 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Nfc;
 using Android.OS;
 using Android.Runtime;
 using Android.Text;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Google.Android.Material.TextField;
 using Mediacal_Diagnosis.Model;
 using Mediacal_Diagnosis.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +22,7 @@ namespace Mediacal_Diagnosis.Activities
     [Activity(Label = "LoginActivity", NoHistory = true)]
     public class LoginActivity : Activity
     {
+        string TAG = "Log: ";
         TextView loginBtn;
         TextInputEditText email, password;
         Button btn;
@@ -27,7 +31,7 @@ namespace Mediacal_Diagnosis.Activities
         {
             base.OnCreate(savedInstanceState);
 
-           
+
             // Create your application here
             SetContentView(Resource.Layout.login_screen);
             loginBtn = FindViewById<TextView>(Resource.Id.reg_now);
@@ -53,14 +57,25 @@ namespace Mediacal_Diagnosis.Activities
                 };
                 var result = await viewModel.AuthenticateUserAsync(user);
 
-                if(result == "success")
+               try
+{
+                    var jsonResult = JsonConvert.DeserializeObject<ApiResponse>(result);
+
+
+                    if (jsonResult.success)
+                    {
+                        Log.Debug(TAG, result);
+                        Intent intent = new Intent(this, typeof(HomeScreen));
+                        StartActivity(intent);
+                    }
+                    else
+                    {
+                        Toast.MakeText(this, "Login Failed!", ToastLength.Long).Show();
+                        btn.Enabled = true;
+                    }
+                }catch (JsonReaderException ex)
                 {
-                    Intent intent = new Intent(this, typeof(HomeScreen));
-                    StartActivity(intent);
-                }
-                else
-                {
-                    Toast.MakeText(this, "Login Failed!", ToastLength.Short).Show();
+                    Toast.MakeText(this, "Login Failed!", ToastLength.Long).Show();
                     btn.Enabled = true;
                 }
                 
@@ -79,7 +94,7 @@ namespace Mediacal_Diagnosis.Activities
         private void RegisterNow(object sender, EventArgs e)
         {
            Intent intent = new Intent(this, typeof(RegisterActivity));
-            StartActivity(intent);
+           StartActivity(intent);
         }
     }
 }

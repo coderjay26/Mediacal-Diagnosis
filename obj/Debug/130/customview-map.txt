@@ -22,6 +22,8 @@ corners;obj\Debug\130\res\drawable\btn_background.xml
 corners;obj\Debug\130\res\drawable\image_background.xml
 declare-styleable;D:\GitHub\Mediacal Diagnosis\obj\Debug\130\lp\0\jl\res\values\values.xml
 dimen;obj\Debug\130\res\values\dimens.xml
+domain;obj\Debug\130\res\xml\network_security_config.xml
+domain-config;obj\Debug\130\res\xml\network_security_config.xml
 enum;D:\GitHub\Mediacal Diagnosis\obj\Debug\130\lp\0\jl\res\values\values.xml
 external-cache-path;D:\GitHub\Mediacal Diagnosis\obj\Debug\130\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 external-path;D:\GitHub\Mediacal Diagnosis\obj\Debug\130\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
@@ -57,6 +59,7 @@ LinearLayout;obj\Debug\130\res\layout\slide_screen_final.xml
 LinearLayout;obj\Debug\130\res\layout\splash_view.xml
 ListView;obj\Debug\130\res\layout\profile_screen.xml
 menu;obj\Debug\130\res\menu\navigation.xml
+network-security-config;obj\Debug\130\res\xml\network_security_config.xml
 path;obj\Debug\130\res\drawable\arrow_back_ios.xml
 path;obj\Debug\130\res\drawable\email_24.xml
 path;obj\Debug\130\res\drawable\ic_add_30.xml

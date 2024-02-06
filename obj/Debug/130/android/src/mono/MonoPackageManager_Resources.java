@@ -4,6 +4,7 @@ public class MonoPackageManager_Resources {
 		/* We need to ensure that "Mediacal Diagnosis.dll" comes first in this list. */
 		"Mediacal Diagnosis.dll",
 		"Lottie.Android.dll",
+		"Newtonsoft.Json.dll",
 		"Square.OkIO.dll",
 		"Xamarin.AndroidX.Activity.dll",
 		"Xamarin.AndroidX.Annotation.dll",
