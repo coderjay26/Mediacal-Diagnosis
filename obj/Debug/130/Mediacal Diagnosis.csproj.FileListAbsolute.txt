@@ -402,3 +402,6 @@ D:\GitHub\Mediacal Diagnosis\obj\Debug\130\android\assets\System.Xml.Linq.pdb
 D:\GitHub\Mediacal Diagnosis\obj\Debug\130\android\assets\System.Xml.ReaderWriter.dll
 D:\GitHub\Mediacal Diagnosis\obj\Debug\130\android\assets\System.Xml.XDocument.dll
 D:\GitHub\Mediacal Diagnosis\obj\Debug\130\res\xml\network_security_config.xml
+D:\GitHub\Mediacal Diagnosis\obj\Debug\130\res\anim\typing_in.xml
+D:\GitHub\Mediacal Diagnosis\obj\Debug\130\res\drawable\rounded_corner.xml
+D:\GitHub\Mediacal Diagnosis\obj\Debug\130\res\drawable\rounded_corner_blue.xml

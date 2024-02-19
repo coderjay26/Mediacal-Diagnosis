@@ -1,0 +1,1 @@
+<shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android"><corners android:radius="10dp" /><!-- Adjust the radius value to change the corner curvature --><solid android:color="@color/material_grey_300" /><!-- Background color --></shape>

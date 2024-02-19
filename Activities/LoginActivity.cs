@@ -49,6 +49,8 @@ namespace Mediacal_Diagnosis.Activities
             btn = FindViewById<Button>(Resource.Id.btnLogin);
             btn.Click += async(object sender, EventArgs e) =>
             {
+                Intent intent1 = new Intent(this, typeof(HomeScreen));
+                StartActivity(intent1);
                 btn.Enabled = false;
                 var user = new ProfileModel
                 {

@@ -26,23 +26,24 @@ namespace Mediacal_Diagnosis.Activities
 
             //SetContentView  
             SetContentView(Resource.Layout.slide_screen_1);
-           _imageView = FindViewById<ImageView>(Resource.Id.nxtbtn);
+            _imageView = FindViewById<ImageView>(Resource.Id.nxtbtn);
             _imageView.Click += SwitchLayout;
         }
         private async void SwitchLayout(object sender, EventArgs e)
         {
             currIndex = (currIndex % 4) + 1;
             int indexLayout = Resource.Layout.slide_screen_1;
-            if(currIndex == 2)
+            if (currIndex == 2)
             {
                 indexLayout = Resource.Layout.slide_screen_2;
-            }else if(currIndex == 3)
+            }
+            else if (currIndex == 3)
             {
                 indexLayout = Resource.Layout.slide_screen_final;
             }
-            else if(currIndex == 4)
+            else if (currIndex == 4)
             {
-                Intent intent = new Intent(this,typeof(LoginActivity));
+                Intent intent = new Intent(this, typeof(LoginActivity));
                 StartActivity(intent);
                 await Task.Delay(1000);
             }
