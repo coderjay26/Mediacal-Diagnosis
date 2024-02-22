@@ -405,3 +405,4 @@ D:\GitHub\Mediacal Diagnosis\obj\Debug\130\res\xml\network_security_config.xml
 D:\GitHub\Mediacal Diagnosis\obj\Debug\130\res\anim\typing_in.xml
 D:\GitHub\Mediacal Diagnosis\obj\Debug\130\res\drawable\rounded_corner.xml
 D:\GitHub\Mediacal Diagnosis\obj\Debug\130\res\drawable\rounded_corner_blue.xml
+D:\GitHub\Mediacal Diagnosis\obj\Debug\130\res\layout\popup_layout.xml

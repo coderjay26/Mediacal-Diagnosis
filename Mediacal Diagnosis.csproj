@@ -82,11 +82,19 @@
     <Compile Include="Database\Medical.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Model\ApiResponse.cs" />
+    <Compile Include="Model\CategoryData.cs" />
+    <Compile Include="Model\CategoryModel.cs" />
+    <Compile Include="Model\CategoryResponse.cs" />
     <Compile Include="Model\LoginRequestModel.cs" />
     <Compile Include="Model\ProfileModel.cs" />
+    <Compile Include="Model\RecommendationRequestModel.cs" />
+    <Compile Include="Model\SymptomsDataByCategory.cs" />
+    <Compile Include="Model\SymptomsModel.cs" />
+    <Compile Include="Model\SymptomsRequestModel.cs" />
     <Compile Include="Model\UserDataModel.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\IProfileDataListener.cs" />
     <Compile Include="ViewModels\AuthViewModel.cs" />
   </ItemGroup>
@@ -318,6 +326,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\rounded_corner_blue.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\popup_layout.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

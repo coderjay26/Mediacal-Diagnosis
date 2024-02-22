@@ -8,6 +8,7 @@ background;obj\Debug\130\res\mipmap-anydpi-v26\ic_launcher.xml
 Button;obj\Debug\130\res\layout\add_profile_view.xml
 Button;obj\Debug\130\res\layout\home_screen.xml
 Button;obj\Debug\130\res\layout\login_screen.xml
+Button;obj\Debug\130\res\layout\popup_layout.xml
 Button;obj\Debug\130\res\layout\register_screen.xml
 cache-path;D:\GitHub\Mediacal Diagnosis\obj\Debug\130\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 CheckBox;obj\Debug\130\res\layout\login_screen.xml
@@ -62,6 +63,7 @@ LinearLayout;obj\Debug\130\res\layout\add_profile_view.xml
 LinearLayout;obj\Debug\130\res\layout\assesment_screen.xml
 LinearLayout;obj\Debug\130\res\layout\home_screen.xml
 LinearLayout;obj\Debug\130\res\layout\login_screen.xml
+LinearLayout;obj\Debug\130\res\layout\popup_layout.xml
 LinearLayout;obj\Debug\130\res\layout\profile_list_view.xml
 LinearLayout;obj\Debug\130\res\layout\profile_screen.xml
 LinearLayout;obj\Debug\130\res\layout\register_screen.xml
@@ -91,6 +93,7 @@ paths;D:\GitHub\Mediacal Diagnosis\obj\Debug\130\lp\40\jl\res\xml\xamarin_essent
 RelativeLayout;obj\Debug\130\res\layout\activity_main.xml
 RelativeLayout;obj\Debug\130\res\layout\assesment_screen.xml
 RelativeLayout;obj\Debug\130\res\layout\home_screen.xml
+RelativeLayout;obj\Debug\130\res\layout\popup_layout.xml
 RelativeLayout;obj\Debug\130\res\layout\profile_list_view.xml
 RelativeLayout;obj\Debug\130\res\layout\tab.xml
 resources;D:\GitHub\Mediacal Diagnosis\obj\Debug\130\lp\0\jl\res\values\values.xml
