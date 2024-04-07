@@ -38,7 +38,7 @@ namespace Mediacal_Diagnosis.Activities
         private TextInputEditText textInputEditText;
         private PopupWindow popupWindow;
         const string message = "To start please select category (gastrointestinal, respiratory, allergic, dental, dermatology, infectious)";
-        private string[] options = { "gastrointestinal", "Respiratory", "allergic", "dental", "dermatology", "infectious" };
+        private string[] options = { "Gastrointestinal", "Respiratory", "Allergic", "Dental", "Dermatology", "Infectious" };
         const string category_error_message = "Sorry category selected is not recognize";
         string Tag = "Jay";
         protected override void OnCreate(Bundle savedInstanceState)

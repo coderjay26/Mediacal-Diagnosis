@@ -26,7 +26,7 @@ namespace Mediacal_Diagnosis.ViewModels
     public class CategoryViewModel
     {
         string TAG = "JAY:";
-        string url = "http://192.168.5.114:8000/";
+        string url = "http://192.168.254.148:8000/";
         public async Task<string> getSymptoms(CategoryModel categories)
         {
             if (categories == null || string.IsNullOrEmpty(categories.Category))
@@ -131,7 +131,7 @@ namespace Mediacal_Diagnosis.ViewModels
                         // Convert the byte array to a string using UTF-8 encoding
                         string jsonResponse = Encoding.UTF8.GetString(contentBytes);
 
-                        Console.WriteLine(jsonResponse);
+                        //Console.WriteLine($"Response {jsonResponse}");
                         return jsonResponse;
                         var result = JsonConvert.DeserializeObject<CategoryResponse>(jsonResponse);
 
