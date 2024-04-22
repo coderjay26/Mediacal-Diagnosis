@@ -42,11 +42,11 @@ namespace Mediacal_Diagnosis
                 editor.PutBoolean("firstTime", false);
                 editor.Apply();
 
-                intent = new Intent(this, typeof(HomeScreen));
+                intent = new Intent(this, typeof(HomeAcivity));
             }
             else
             {
-                intent = new Intent(this, typeof(HomeScreen));
+                intent = new Intent(this, typeof(HomeAcivity));
             }
             Log.Debug(TAG, "Performing some startup work that takes a bit of time.");
             await Task.Delay(3000); 

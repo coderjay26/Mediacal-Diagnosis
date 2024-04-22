@@ -34,7 +34,9 @@ namespace Mediacal_Diagnosis.Activities
     {
         Animation anim;
         bool isCategory = true;
+        bool isShow = true;
         private System.Timers.Timer timer;
+        private System.Timers.Timer times;
         private TextInputEditText textInputEditText;
         private PopupWindow popupWindow;
         const string message = "To start please select category (gastrointestinal, respiratory, allergic, dental, dermatology, infectious)";
@@ -63,13 +65,14 @@ namespace Mediacal_Diagnosis.Activities
             if(isCategory)
             {
                 timer = new System.Timers.Timer();
-                timer.Interval = 5500; // 5 seconds
+                timer.Interval = 500; // 5 seconds
                 timer.Elapsed += Timer_Elapsed;
                 timer.AutoReset = false; // Only fire once
                 timer.Start();
             }
+
             // Start the timer when the activity is created
-            
+
             sendbtn.Click += (s, e) =>
             {
                 TextInputEditText mes = FindViewById<TextInputEditText>(Resource.Id.userMessage);
@@ -154,13 +157,16 @@ namespace Mediacal_Diagnosis.Activities
                             ViewGroup.LayoutParams.WrapContent,
                             ViewGroup.LayoutParams.WrapContent,
                             true);
-
+                        popupWindow.OutsideTouchable = false;
+                        popupWindow.Focusable = true;
+                        isCategory = true;
                         await Task.Delay(600);
+                        
                         // Show the popup window at the center of the screen
                         popupWindow.ShowAtLocation(popupView, GravityFlags.Center, 0, 0);
                         // Get the LinearLayout container for checkboxes
                         LinearLayout checkboxContainer = popupView.FindViewById<LinearLayout>(Resource.Id.checkbox_container);
-                        // Example: Dismiss the popup window when a button is clicked
+                        //Dismiss the popup window when a button is clicked
                         Button dismissButton = popupView.FindViewById<Button>(Resource.Id.dismiss_button);
                         List<string> selectedSymptoms = new List<string>();
                         dismissButton.Click += async (sender, args) =>
@@ -184,7 +190,10 @@ namespace Mediacal_Diagnosis.Activities
                             Console.WriteLine(selectedSymptomsString);
                             var response = await categoryViewModel.getRecommendation(symptoms);
                             CreateChatBotResponse(response);
-                           
+                            await Task.Delay(2000);
+                            isCategory = true;
+                            await Task.Delay(2000);
+                            CreateChatBotResponse(message);
                         };
 
                         

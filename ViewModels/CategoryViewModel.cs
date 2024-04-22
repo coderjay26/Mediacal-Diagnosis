@@ -26,7 +26,7 @@ namespace Mediacal_Diagnosis.ViewModels
     public class CategoryViewModel
     {
         string TAG = "JAY:";
-        string url = "http://192.168.254.148:8000/";
+        string url = "http://192.168.254.148:8080/";
         public async Task<string> getSymptoms(CategoryModel categories)
         {
             if (categories == null || string.IsNullOrEmpty(categories.Category))
