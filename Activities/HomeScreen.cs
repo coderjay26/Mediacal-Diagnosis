@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Hardware.Lights;
@@ -25,6 +26,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AlertDialog = Android.App.AlertDialog;
+using Orientation = Android.Widget.Orientation;
 
 namespace Mediacal_Diagnosis.Activities
 {
@@ -33,16 +35,20 @@ namespace Mediacal_Diagnosis.Activities
     public class HomeScreen : AppCompatActivity
     {
         Animation anim;
+        Animation animation;
+        LinearLayout newLinearLayout;
+        ListView listView;
+        private ScrollView scrollView;
         bool isCategory = true;
         bool isShow = true;
         private System.Timers.Timer timer;
         private System.Timers.Timer times;
         private TextInputEditText textInputEditText;
+        private LinearLayout inputMsg;
         private PopupWindow popupWindow;
         const string message = "To start please select category (gastrointestinal, respiratory, allergic, dental, dermatology, infectious)";
         private string[] options = { "Gastrointestinal", "Respiratory", "Allergic", "Dental", "Dermatology", "Infectious" };
         const string category_error_message = "Sorry category selected is not recognize";
-        string Tag = "Jay";
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -55,36 +61,19 @@ namespace Mediacal_Diagnosis.Activities
             
             SetContentView(Resource.Layout.home_screen);
             anim = AnimationUtils.LoadAnimation(this, Resource.Animation.typing_in);
-            
-            var sendbtn = FindViewById<MaterialButton>(Resource.Id.sendButton);
-
-            textInputEditText = FindViewById<TextInputEditText>(Resource.Id.userMessage);
-
-            textInputEditText.TextChanged += TextInputEditText_TextChanged;
+            scrollView = FindViewById<ScrollView>(Resource.Id.messagesScroll);
+            inputMsg = FindViewById<LinearLayout>(Resource.Id.inputMsg);
+            animation = AnimationUtils.LoadAnimation(this, Resource.Animation.slide_up);
+           
 
             if(isCategory)
             {
                 timer = new System.Timers.Timer();
-                timer.Interval = 500; // 5 seconds
+                timer.Interval = 5500; // 5 seconds
                 timer.Elapsed += Timer_Elapsed;
                 timer.AutoReset = false; // Only fire once
                 timer.Start();
             }
-
-            // Start the timer when the activity is created
-
-            sendbtn.Click += (s, e) =>
-            {
-                TextInputEditText mes = FindViewById<TextInputEditText>(Resource.Id.userMessage);
-
-                string userMessage = mes.Text;
-                if (!string.IsNullOrWhiteSpace(userMessage))
-                {
-                    CreateUserMessage(userMessage);
-
-                }
-                mes.Text = "";
-            };
 
             // Call the method to create and add the LinearLayout
             AddNewLinearLayoutWithAnimation();
@@ -95,37 +84,24 @@ namespace Mediacal_Diagnosis.Activities
             {
                 RunOnUiThread(() =>
                 {
-                    ShowPopupIfNeeded();
+                    ShowPopup(options);
                 });
-            }
-        }
-
-        private void TextInputEditText_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
-        {
-            // Restart the timer whenever text changes
-            timer.Stop();
-            timer.Start();
-        }
-
-        private void ShowPopupIfNeeded()
-        {
-            string filterText = textInputEditText.Text.ToLower();
-            string[] filteredOptions = options.Where(option => option.ToLower().Contains(filterText)).ToArray();
-
-            if (filteredOptions.Length > 0)
-            {
-                ShowPopup(filteredOptions);
-            }
-            else
-            {
-                HidePopup();
             }
         }
 
         private void ShowPopup(string[] options)
         {
             // Create ListView for options
-            ListView listView = new ListView(this);
+            listView = new ListView(this);
+            listView.LayoutParameters = new ListView.LayoutParams(
+                ListView.LayoutParams.MatchParent,
+                ListView.LayoutParams.WrapContent
+            );
+
+            // Set margins
+            var layoutParams = (ListView.LayoutParams)listView.LayoutParameters;
+            listView.LayoutParameters = layoutParams;
+            listView.Bottom = 0;
             CategoryViewModel categoryViewModel = new CategoryViewModel();
             listView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, options);
             listView.ItemClick += async (s, e) =>
@@ -133,7 +109,6 @@ namespace Mediacal_Diagnosis.Activities
                 string selectedOption = options[e.Position];
                 CreateUserMessage(selectedOption);
                 var category = createCategoryModel(selectedOption);
-                textInputEditText.Text = "";
                 isCategory = false;
                 HidePopup();
                 var categories = new CategoryModel
@@ -154,16 +129,16 @@ namespace Mediacal_Diagnosis.Activities
                         // Create the popup window
                         PopupWindow popupWindow = new PopupWindow(
                             popupView,
-                            ViewGroup.LayoutParams.WrapContent,
+                            ViewGroup.LayoutParams.MatchParent,
                             ViewGroup.LayoutParams.WrapContent,
                             true);
                         popupWindow.OutsideTouchable = false;
-                        popupWindow.Focusable = true;
+                        popupWindow.Focusable = false;
                         isCategory = true;
                         await Task.Delay(600);
                         
                         // Show the popup window at the center of the screen
-                        popupWindow.ShowAtLocation(popupView, GravityFlags.Center, 0, 0);
+                        popupWindow.ShowAtLocation(popupView, GravityFlags.Bottom, 0, 0);
                         // Get the LinearLayout container for checkboxes
                         LinearLayout checkboxContainer = popupView.FindViewById<LinearLayout>(Resource.Id.checkbox_container);
                         //Dismiss the popup window when a button is clicked
@@ -187,13 +162,15 @@ namespace Mediacal_Diagnosis.Activities
                             {
                                 symptoms = selectedSymptomsString
                             };
-                            Console.WriteLine(selectedSymptomsString);
+                            await Task.Delay(2000);
                             var response = await categoryViewModel.getRecommendation(symptoms);
                             CreateChatBotResponse(response);
                             await Task.Delay(2000);
                             isCategory = true;
                             await Task.Delay(2000);
                             CreateChatBotResponse(message);
+                            await Task.Delay(500);
+                            ShowPopup(options);
                         };
 
                         
@@ -214,30 +191,32 @@ namespace Mediacal_Diagnosis.Activities
                 catch (JsonReaderException ex)
                 {
                     Toast.MakeText(this, "Login Failed!", ToastLength.Long).Show();
-
+                    ShowPopup(options);
                 }
             };
+          
+            var parentLinearLayout = FindViewById<LinearLayout>(Resource.Id.inputMsg);
 
-            // Calculate the height of the PopupWindow
-            int height = options.Length * 150;
+            // Start animation
+            listView.StartAnimation(animation);
 
-            // Create PopupWindow
-            popupWindow = new PopupWindow(listView, textInputEditText.Width, height, true);
-            popupWindow.Focusable = true;
-            popupWindow.SetBackgroundDrawable(new ColorDrawable(Color.White));
+            // Add the new LinearLayout to the parent LinearLayout
+            parentLinearLayout.AddView(listView);
+            scrollView.Post(() =>
+            {
+                scrollView.SmoothScrollTo(0, newLinearLayout.Top);
+            });
 
-            textInputEditText.RequestFocus();
-            // Show the PopupWindow above the TextInputEditText
-            popupWindow.ShowAsDropDown(textInputEditText, 0, -height);
+
         }
 
 
         private void HidePopup()
         {
-            if (popupWindow != null && popupWindow.IsShowing)
+            if (listView != null )
             {
-                popupWindow.Dismiss();
-                popupWindow = null;
+                listView.Visibility = ViewStates.Gone;
+                listView = null;
             }
         }
         private async void AddNewLinearLayoutWithAnimation()
@@ -254,7 +233,7 @@ namespace Mediacal_Diagnosis.Activities
         private async void CreateChatBotResponse(string Message)
         {
             // Create a new LinearLayout
-            var newLinearLayout = new LinearLayout(this);
+            newLinearLayout = new LinearLayout(this);
             newLinearLayout.Orientation = Orientation.Horizontal;
             newLinearLayout.LayoutParameters = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WrapContent,
@@ -304,14 +283,21 @@ namespace Mediacal_Diagnosis.Activities
 
             // Start animation
             newLinearLayout.StartAnimation(anim);
-
+            
             // Add the new LinearLayout to the parent LinearLayout
             parentLinearLayout.AddView(newLinearLayout);
+
+            scrollView.Post(() =>
+            {
+                scrollView.SmoothScrollTo(0, newLinearLayout.Top);
+            }); 
+
+
         }
         private void CreateUserMessage(string Message)
         {
             // Create a new LinearLayout
-            var newLinearLayout = new LinearLayout(this);
+            newLinearLayout = new LinearLayout(this);
             newLinearLayout.Orientation = Orientation.Horizontal;
             newLinearLayout.LayoutParameters = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WrapContent,
@@ -354,6 +340,11 @@ namespace Mediacal_Diagnosis.Activities
 
             // Add the new LinearLayout to the parent LinearLayout
            parentLinearLayout.AddView(newLinearLayout);
+            scrollView.Post(() =>
+            {
+                scrollView.SmoothScrollTo(0, newLinearLayout.Top);
+            });
+
         }
         public static CategoryModel createCategoryModel(string categorys)
         {

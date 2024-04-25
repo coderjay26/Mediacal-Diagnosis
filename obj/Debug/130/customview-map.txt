@@ -70,6 +70,7 @@ LinearLayout;obj\Debug\130\res\layout\register_screen.xml
 LinearLayout;obj\Debug\130\res\layout\slide_screen_1.xml
 LinearLayout;obj\Debug\130\res\layout\slide_screen_2.xml
 LinearLayout;obj\Debug\130\res\layout\slide_screen_final.xml
+LinearLayout;obj\Debug\130\res\layout\slide_up.xml
 LinearLayout;obj\Debug\130\res\layout\splash_view.xml
 ListView;obj\Debug\130\res\layout\home_screen.xml
 ListView;obj\Debug\130\res\layout\profile_list_view.xml
@@ -104,7 +105,9 @@ resources;obj\Debug\130\res\values\splash.xml
 resources;obj\Debug\130\res\values\strings.xml
 resources;obj\Debug\130\res\values\styles.xml
 ScrollView;obj\Debug\130\res\layout\home_screen.xml
+set;obj\Debug\130\res\anim\slide_up.xml
 set;obj\Debug\130\res\anim\typing_in.xml
+set;obj\Debug\130\res\layout\slide_up.xml
 shape;obj\Debug\130\res\drawable\btn_background.xml
 shape;obj\Debug\130\res\drawable\image_background.xml
 shape;obj\Debug\130\res\drawable\rounded_corner.xml
@@ -129,6 +132,8 @@ TextView;obj\Debug\130\res\layout\register_screen.xml
 TextView;obj\Debug\130\res\layout\slide_screen_1.xml
 TextView;obj\Debug\130\res\layout\slide_screen_2.xml
 TextView;obj\Debug\130\res\layout\slide_screen_final.xml
+translate;obj\Debug\130\res\anim\slide_up.xml
+translate;obj\Debug\130\res\layout\slide_up.xml
 vector;obj\Debug\130\res\drawable\arrow_back_ios.xml
 vector;obj\Debug\130\res\drawable\email_24.xml
 vector;obj\Debug\130\res\drawable\ic_add_30.xml

@@ -21,7 +21,7 @@ namespace Mediacal_Diagnosis.ViewModels
     public class AuthViewModel
     {
         string TAG = "Log:";
-        string url = "http://192.168.254.148:8000/";
+        string url = "http://192.168.7.182:8080/";
         public async Task<string> AuthenticateUserAsync(ProfileModel profile)
         {
 
@@ -88,18 +88,24 @@ namespace Mediacal_Diagnosis.ViewModels
         {
             using (var client = new HttpClient())
             {
-                var content = new FormUrlEncodedContent(new[]
+                LoginRequestModel loginRequestModel = new LoginRequestModel()
                 {
-                    new KeyValuePair<string, string> ("fullname", profileModel.Name), 
-                    new KeyValuePair<string, string>("username", profileModel.Email),
-                    new KeyValuePair<string, string>("phone", profileModel.Phone),
-                    new KeyValuePair<string, string> ( "password", profileModel.Password )
-                });
-                var response = await client.PostAsync("https://ccsandroidapplication.000webhostapp.com/register.php", content);
+                    module = "user",
+                    request = "createuser",
+                    data = new UserDataModel()
+                    {
+                        username = profileModel.Email,
+                        name = profileModel.Name,
+                        password = profileModel.Password,
+                        phone = profileModel.Phone
+                    }
+                };
+                string json = JsonConvert.SerializeObject(loginRequestModel);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, data);
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = await response.Content?.ReadAsStringAsync();
-                    return result.Trim() ;
+                    return "success";
                 }
                 else
                 {

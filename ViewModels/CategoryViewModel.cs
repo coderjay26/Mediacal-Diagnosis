@@ -25,8 +25,8 @@ namespace Mediacal_Diagnosis.ViewModels
 {
     public class CategoryViewModel
     {
-        string TAG = "JAY:";
-        string url = "http://192.168.254.148:8080/";
+        string TAG = "LOG:";
+        string url = "http://192.168.7.182:8080/";
         public async Task<string> getSymptoms(CategoryModel categories)
         {
             if (categories == null || string.IsNullOrEmpty(categories.Category))
@@ -35,7 +35,7 @@ namespace Mediacal_Diagnosis.ViewModels
                 return "failed"; // or throw an exception, depending on your logic
             }
             Console.WriteLine(categories.Category);
-            using (var client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
 
                 SymptomsRequestModel content = new SymptomsRequestModel()
