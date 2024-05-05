@@ -85,9 +85,15 @@
     <Compile Include="Model\CategoryData.cs" />
     <Compile Include="Model\CategoryModel.cs" />
     <Compile Include="Model\CategoryResponse.cs" />
+    <Compile Include="Model\DiagnosisNode.cs" />
     <Compile Include="Model\LoginRequestModel.cs" />
+    <Compile Include="Model\Node.cs" />
     <Compile Include="Model\ProfileModel.cs" />
+    <Compile Include="Model\QuestionNode.cs" />
     <Compile Include="Model\RecommendationRequestModel.cs" />
+    <Compile Include="Model\Response.cs" />
+    <Compile Include="Model\SpecificQuestionNode.cs" />
+    <Compile Include="Model\Symptom.cs" />
     <Compile Include="Model\SymptomsDataByCategory.cs" />
     <Compile Include="Model\SymptomsModel.cs" />
     <Compile Include="Model\SymptomsRequestModel.cs" />

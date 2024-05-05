@@ -1,21 +1,10 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.Content.Res;
-using Android.Graphics;
-using Android.Graphics.Drawables;
-using Android.Hardware.Lights;
-using Android.Nfc;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using AndroidX.RecyclerView.Widget;
-using Google.Android.Material.BottomNavigation;
-using Google.Android.Material.Button;
-using Google.Android.Material.FloatingActionButton;
 using Google.Android.Material.TextField;
 using Mediacal_Diagnosis.Model;
 using Mediacal_Diagnosis.ViewModels;
@@ -23,9 +12,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
-using AlertDialog = Android.App.AlertDialog;
 using Orientation = Android.Widget.Orientation;
 
 namespace Mediacal_Diagnosis.Activities
@@ -34,6 +22,7 @@ namespace Mediacal_Diagnosis.Activities
     [Obsolete]
     public class HomeScreen : AppCompatActivity
     {
+         private Dictionary<string, Symptom> categories;
         Animation anim;
         Animation animation;
         LinearLayout newLinearLayout;
@@ -48,13 +37,14 @@ namespace Mediacal_Diagnosis.Activities
         private PopupWindow popupWindow;
         const string message = "To start please select category (gastrointestinal, respiratory, allergic, dental, dermatology, infectious)";
         private string[] options = { "Gastrointestinal", "Respiratory", "Allergic", "Dental", "Dermatology", "Infectious" };
-        const string category_error_message = "Sorry category selected is not recognize";
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-           
+           InitializeCategories();
             
         }
+
         protected async override void OnResume()
         {
             base.OnResume();
@@ -69,7 +59,7 @@ namespace Mediacal_Diagnosis.Activities
             if(isCategory)
             {
                 timer = new System.Timers.Timer();
-                timer.Interval = 5500; // 5 seconds
+                timer.Interval = 4000; // 5 seconds
                 timer.Elapsed += Timer_Elapsed;
                 timer.AutoReset = false; // Only fire once
                 timer.Start();
@@ -78,6 +68,7 @@ namespace Mediacal_Diagnosis.Activities
             // Call the method to create and add the LinearLayout
             AddNewLinearLayoutWithAnimation();
         }
+
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (isCategory)
@@ -91,125 +82,9 @@ namespace Mediacal_Diagnosis.Activities
 
         private void ShowPopup(string[] options)
         {
-            // Create ListView for options
-            listView = new ListView(this);
-            listView.LayoutParameters = new ListView.LayoutParams(
-                ListView.LayoutParams.MatchParent,
-                ListView.LayoutParams.WrapContent
-            );
-
-            // Set margins
-            var layoutParams = (ListView.LayoutParams)listView.LayoutParameters;
-            listView.LayoutParameters = layoutParams;
-            listView.Bottom = 0;
-            CategoryViewModel categoryViewModel = new CategoryViewModel();
-            listView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, options);
-            listView.ItemClick += async (s, e) =>
-            {
-                string selectedOption = options[e.Position];
-                CreateUserMessage(selectedOption);
-                var category = createCategoryModel(selectedOption);
-                isCategory = false;
-                HidePopup();
-                var categories = new CategoryModel
-                {
-                    Category = selectedOption
-                };
-                var result = await categoryViewModel.getSymptoms(categories);
-                try
-                {
-                    var jsonResult = JsonConvert.DeserializeObject<CategoryResponse>(result);
-
-                    if (jsonResult != null && jsonResult.success)
-                    {
-                        CreateChatBotResponse("Please select your symptoms");
-                        // Inflate the popup layout
-                        View popupView = LayoutInflater.FromContext(this).Inflate(Resource.Layout.popup_layout, null);
-
-                        // Create the popup window
-                        PopupWindow popupWindow = new PopupWindow(
-                            popupView,
-                            ViewGroup.LayoutParams.MatchParent,
-                            ViewGroup.LayoutParams.WrapContent,
-                            true);
-                        popupWindow.OutsideTouchable = false;
-                        popupWindow.Focusable = false;
-                        isCategory = true;
-                        await Task.Delay(600);
-                        
-                        // Show the popup window at the center of the screen
-                        popupWindow.ShowAtLocation(popupView, GravityFlags.Bottom, 0, 0);
-                        // Get the LinearLayout container for checkboxes
-                        LinearLayout checkboxContainer = popupView.FindViewById<LinearLayout>(Resource.Id.checkbox_container);
-                        //Dismiss the popup window when a button is clicked
-                        Button dismissButton = popupView.FindViewById<Button>(Resource.Id.dismiss_button);
-                        List<string> selectedSymptoms = new List<string>();
-                        dismissButton.Click += async (sender, args) =>
-                        {
-                            // Iterate over all checkboxes to get selected symptoms
-                            for (int i = 0; i < checkboxContainer.ChildCount; i++)
-                            {
-                                View childView = checkboxContainer.GetChildAt(i);
-                                if (childView is CheckBox checkBox && checkBox.Checked)
-                                {
-                                    selectedSymptoms.Add(checkBox.Text);
-                                }
-                            }
-                            popupWindow.Dismiss();
-                            string selectedSymptomsString = string.Join(",", selectedSymptoms);
-                            CreateUserMessage(selectedSymptomsString);
-                            var symptoms = new SymptomsModel
-                            {
-                                symptoms = selectedSymptomsString
-                            };
-                            await Task.Delay(2000);
-                            var response = await categoryViewModel.getRecommendation(symptoms);
-                            CreateChatBotResponse(response);
-                            await Task.Delay(2000);
-                            isCategory = true;
-                            await Task.Delay(2000);
-                            CreateChatBotResponse(message);
-                            await Task.Delay(500);
-                            ShowPopup(options);
-                        };
-
-                        
-
-                        // Populate the checkboxes with symptoms data
-                        foreach (var symptoms in jsonResult.data)
-                        {
-                            foreach (var symptom in symptoms.Symptoms)
-                            {
-                                CheckBox checkBox = new CheckBox(this);
-                                checkBox.Text = symptom;
-                                checkboxContainer.AddView(checkBox);
-                            }
-
-                        }
-                    }
-                }
-                catch (JsonReaderException ex)
-                {
-                    Toast.MakeText(this, "Login Failed!", ToastLength.Long).Show();
-                    ShowPopup(options);
-                }
-            };
-          
-            var parentLinearLayout = FindViewById<LinearLayout>(Resource.Id.inputMsg);
-
-            // Start animation
-            listView.StartAnimation(animation);
-
-            // Add the new LinearLayout to the parent LinearLayout
-            parentLinearLayout.AddView(listView);
-            scrollView.Post(() =>
-            {
-                scrollView.SmoothScrollTo(0, newLinearLayout.Top);
-            });
-
+            askDetails();
 
         }
-
 
         private void HidePopup()
         {
@@ -217,17 +92,19 @@ namespace Mediacal_Diagnosis.Activities
             {
                 listView.Visibility = ViewStates.Gone;
                 listView = null;
+
             }
+           
         }
+
         private async void AddNewLinearLayoutWithAnimation()
         {
             // Delay for animation
             await Task.Delay(1000);
             // Create a new LinearLayout
             CreateChatBotResponse(Resources.GetString(Resource.String.home_text));
-            await Task.Delay(2000);
-            CreateChatBotResponse(message);
-            await Task.Delay(500);
+            await Task.Delay(800);
+            CreateChatBotResponse("Let's start with the symptom that's troubling you the most. ");
         }
 
         private async void CreateChatBotResponse(string Message)
@@ -270,7 +147,6 @@ namespace Mediacal_Diagnosis.Activities
             innerLinearLayout.SetPadding(24, 24, 24, 24);
             innerLinearLayout.SetBackgroundResource(Resource.Drawable.rounded_corner);
             innerLinearLayout.AddView(textView);
-
             // Add views to the new LinearLayout
             newLinearLayout.AddView(imageView);
             newLinearLayout.AddView(innerLinearLayout);
@@ -294,6 +170,7 @@ namespace Mediacal_Diagnosis.Activities
 
 
         }
+
         private void CreateUserMessage(string Message)
         {
             // Create a new LinearLayout
@@ -346,6 +223,7 @@ namespace Mediacal_Diagnosis.Activities
             });
 
         }
+
         public static CategoryModel createCategoryModel(string categorys)
         {
            var categories = new CategoryModel
@@ -353,6 +231,137 @@ namespace Mediacal_Diagnosis.Activities
                 Category = categorys
             };
             return categories;
+        }
+
+        public async void askDetails()
+        {
+            listView = new ListView(this);
+            listView.LayoutParameters = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MatchParent,
+                LinearLayout.LayoutParams.WrapContent
+            );
+
+            // Set margins
+            var layoutParams = (LinearLayout.LayoutParams)listView.LayoutParameters;
+            listView.LayoutParameters = layoutParams;
+            listView.Bottom = 0;
+            CategoryViewModel categoryViewModel = new CategoryViewModel();
+
+            // Check if categories is not null
+            if (categories != null)
+            {
+                var categoryNames = new List<string>(categories.Keys);
+                listView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, categoryNames);
+            }
+            else
+            {
+                // Handle the case where categories is null
+                Console.WriteLine("Categories is null");
+                return;
+            }
+
+            var parentLinearLayout = FindViewById<LinearLayout>(Resource.Id.inputMsg);
+
+            // Start animation
+            listView.StartAnimation(animation);
+
+            // Add the new LinearLayout to the parent LinearLayout
+            parentLinearLayout.AddView(listView);
+            scrollView.Post(() =>
+            {
+                scrollView.SmoothScrollTo(0, newLinearLayout.Top);
+            });
+
+            listView.ItemClick += (sender, args) =>
+            {
+                var selectedCategory = categories.ElementAt(args.Position).Key;
+                CreateUserMessage(selectedCategory);
+                var currentNode = categories[selectedCategory];
+                HidePopup();
+                UpdateQuestionAndAnswers(currentNode);
+            };
+        }
+
+        private async void UpdateQuestionAndAnswers(Symptom symptom)
+        {
+            listView = new ListView(this);
+            listView.LayoutParameters = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MatchParent,
+                LinearLayout.LayoutParams.WrapContent
+            );
+
+            // Set margins
+            var layoutParams = (LinearLayout.LayoutParams)listView.LayoutParameters;
+            listView.LayoutParameters = layoutParams;
+            listView.Bottom = 0;
+            await Task.Delay(800);
+            CreateChatBotResponse(symptom.question);
+
+            if (symptom.responses != null)
+            {
+                var responseList = new List<string>(symptom.responses.Keys);
+                listView.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, responseList);
+
+                var parentLinearLayout = FindViewById<LinearLayout>(Resource.Id.inputMsg);
+                // Start animation
+                listView.StartAnimation(animation);
+                await Task.Delay(800);
+                // Add the new LinearLayout to the parent LinearLayout
+                parentLinearLayout.AddView(listView);
+                scrollView.Post(() =>
+                {
+                    scrollView.SmoothScrollTo(0, newLinearLayout.Top);
+                });
+
+                listView.ItemClick += async (sender, args) =>
+                {
+                    var selectedResponse = responseList[args.Position];
+                    CreateUserMessage(selectedResponse);
+                    var selectedNode = symptom.responses[selectedResponse];
+                    HidePopup();
+                    if (selectedNode != null)
+                    {
+                        if (selectedNode.responses != null)
+                        {
+                            UpdateQuestionAndAnswers(selectedNode);
+                        }
+                        else
+                        {
+                            var diagnosis = selectedNode.diagnosis;
+                            var recommendation = selectedNode.recommendation;
+                            await Task.Delay(500);
+                            CreateChatBotResponse($"Diagnosis: {diagnosis}");
+                            await Task.Delay(500);
+                            CreateChatBotResponse($"Recommendation: {recommendation}");
+                            await Task.Delay(800);
+                            CreateChatBotResponse("Let's start with the symptom that's troubling you the most. ");
+                            await Task.Delay(500);
+                            askDetails();
+                        }
+                    }
+                };
+            }
+        }
+
+        private async Task InitializeCategories()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetAsync("http://192.168.254.148:8080/admin/api.php");
+                    response.EnsureSuccessStatusCode();
+                    var json = await response.Content.ReadAsStringAsync();
+                    //Console.WriteLine(json);
+                    categories = JsonConvert.DeserializeObject<Dictionary<string, Symptom>>(json);
+                    Console.WriteLine(categories.Count);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                Console.WriteLine($"Error: {ex.Message}");
+            }
         }
     }
 }

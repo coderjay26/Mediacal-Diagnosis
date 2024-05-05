@@ -62,7 +62,6 @@ namespace Mediacal_Diagnosis.ViewModels
 
                     if (response.IsSuccessStatusCode)
                     {
-                       Console.WriteLine("Sulodddddddddddddddddddddd");
                         // Read the response content as a byte array
                         byte[] contentBytes = await response.Content.ReadAsByteArrayAsync();
 
@@ -124,7 +123,6 @@ namespace Mediacal_Diagnosis.ViewModels
 
                     if (response.IsSuccessStatusCode)
                     {
-                        Console.WriteLine("Sulodddddddddddddddddddddd");
                         // Read the response content as a byte array
                         byte[] contentBytes = await response.Content.ReadAsByteArrayAsync();
 
@@ -149,7 +147,6 @@ namespace Mediacal_Diagnosis.ViewModels
                         }
                         else
                         {
-                            Log.Debug(TAG, "Walay success");
                             return "failed";
                         }
                     }
@@ -166,5 +163,33 @@ namespace Mediacal_Diagnosis.ViewModels
                 }
             }
         }
+        public async Task<string> GetData()
+        {
+            using (var client = new HttpClient())
+            {
+                // Set the base address of the API
+                //client.BaseAddress = new Uri("http://192.168.254.148:8080/api.php");
+
+                // Send a GET request to the specified endpoint
+                var response = await client.GetAsync("http://192.168.254.148:8080/api.php");
+
+                // Check if the response is successful
+                if (response.IsSuccessStatusCode)
+                {
+                    // Read the content of the response as a string
+                    string jsonData = await response.Content.ReadAsStringAsync();
+                    //Response data = JsonConvert.DeserializeObject<Response>(jsonData);
+                    // Return the JSON data
+                    return jsonData;
+                }
+                else
+                {
+                    // Handle the case where the request was not successful
+                    Console.WriteLine("Failed to retrieve data. Status code: " + response.StatusCode);
+                    return ""; // Or throw an exception, depending on your requirements
+                }
+            }
+        }
+
     }
 }
