@@ -43,7 +43,7 @@ namespace Mediacal_Diagnosis.Activities
             }
             else if (currIndex == 4)
             {
-                Intent intent = new Intent(this, typeof(HomeScreen));
+                Intent intent = new Intent(this, typeof(LoginActivity));
                 StartActivity(intent);
                 await Task.Delay(1000);
             }
